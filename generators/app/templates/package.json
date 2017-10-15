@@ -1,5 +1,5 @@
 {
-  "name": "A node app",
+  "name": "express-crud",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

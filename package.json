@@ -1,6 +1,6 @@
 {
   "name": "generator-express-ts-crud",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A generator for a basic REST API with CRUD operations on a MongoDB with TypeScript & Express",
   "homepage": "",
   "author": {

@@ -1,5 +1,5 @@
 # generator-express-ts-crud [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> A generator for an API REST with CRUD operations on a MongoDB with TypeScript &amp; Express
+> A generator for a REST API with CRUD operations on a MongoDB with TypeScript &amp; Express
 
 ## Installation
 

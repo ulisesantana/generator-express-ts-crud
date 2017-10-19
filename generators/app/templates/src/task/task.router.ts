@@ -24,7 +24,7 @@ class TaskRouter {
       .then((data) => {
         if (!data) {
           res.status(404).send({
-            message: 'Task requested doesn\'t exist'
+            data: new Error('Task requested doesn\'t exist')
           });
         } else {
           res.status(200).send({
@@ -34,17 +34,17 @@ class TaskRouter {
       })
       .catch((err) => {
         res.status(500).send({
-          message: 'Error retrieving the task'
+          data: new Error('Error retrieving the task')
         });
       });
-    }
-    
-    private getTasks(req: Request, res: Response): void {
-      TaskModel.find({})
+  }
+
+  private getTasks(req: Request, res: Response): void {
+    TaskModel.find({})
       .then((data) => {
         if (!data) {
           res.status(404).send({
-            message: 'There are no tasks'
+            data: new Error('There are no tasks')
           });
         } else {
           res.status(200).send({
@@ -55,35 +55,29 @@ class TaskRouter {
       .catch((err) => {
         console.log(err);
         res.status(500).send({
-          message: 'Error retrieving tasks'
+          data: new Error('Error retrieving tasks')
         });
       });
-    }
-    
-    private saveTask(req: Request, res: Response): void {
-      const params = req.body;
-      const task = new TaskModel({
-        name: params.name,
-        createdAt: (new Date).toISOString(),
-        updatedAt: (new Date).toISOString()
-      });
-      
-      task.save().
-      then( (data) => {
-        if (!data) {
-          res.status(404).send({
-            message: 'No hay libros'
-          });
-        } else {
-          res.status(200).send({
-            data
-          });
-        }
+  }
+
+  private saveTask(req: Request, res: Response): void {
+    const params = req.body;
+    const task = new TaskModel({
+      name: params.name,
+      createdAt: (new Date).toISOString(),
+      updatedAt: (new Date).toISOString()
+    });
+
+    task.save().
+      then((data) => {
+        res.status(200).send({
+          data
+        });
       })
-      .catch( (err) => {
+      .catch((err) => {
         console.log(err);
         res.status(500).send({
-          message: 'Error al crear el libro'
+          data: new Error('Error creating task')
         });
       });
 
@@ -98,20 +92,14 @@ class TaskRouter {
 
     TaskModel.findByIdAndUpdate({ _id: taskId }, params, options)
       .then((data) => {
-        if (!data) {
-          res.status(404).send({
-            message: 'El libro que quieres actualizar no existe'
-          });
-        } else {
-          res.status(200).send({
-            data
-          });
-        }
+        res.status(200).send({
+          data
+        });
       })
       .catch((err) => {
         console.log(err);
         res.status(500).send({
-          message: 'Error al devolver los libros'
+          data: new Error('Error updating task')
         });
       });
   }
@@ -121,20 +109,14 @@ class TaskRouter {
 
     TaskModel.findByIdAndRemove({ _id: taskId })
       .then((data) => {
-        if (!data) {
-          res.status(404).send({
-            message: 'El libro que quieres eliminar no existe'
-          });
-        } else {
-          res.status(200).send({
-            data
-          });
-        }
+        res.status(200).send({
+          data
+        });
       })
       .catch((err) => {
         console.log(err);
         res.status(500).send({
-          message: 'Error al eliminar'
+          data: new Error('Error deleting task')
         });
       });
   }
